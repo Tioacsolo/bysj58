@@ -121,12 +121,6 @@ class Model(nn.Module):
             check_anchor_order(m)
             self.stride = m.stride
             self._initialize_biases()  # only run once
-        if isinstance(m, (DetectX, DetectYoloX)):
-            m.inplace = self.inplace
-            self.stride = torch.tensor(m.stride)
-            m.initialize_biases()  # only run once
-            self.model_type = 'yolox'
-            self.loss_category = ComputeXLoss  # use ComputeXLoss
         if isinstance(m, Decoupled_Detect) or isinstance(m, ASFF_Detect):
             s = 256  # 2x min stride
             m.inplace = self.inplace
@@ -438,8 +432,6 @@ def parse_model(d, ch):  # model_dict, input_channels(3)
             args.append([ch[x] for x in f])
             if isinstance(args[1], int):  # number of anchors
                 args[1] = [list(range(args[1] * 2))] * len(f)
-        elif m in {DetectX, DetectYoloX}:
-            args.append([ch[x] for x in f])
         elif m is Contract:  # no
             c2 = ch[f] * args[0] ** 2
         elif m is MobileOne:
