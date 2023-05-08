@@ -10,7 +10,7 @@ import argparse
 import sys
 from copy import deepcopy
 from pathlib import Path
-from models.yolox import DetectX, DetectYoloX
+#from models.yolox import DetectX, DetectYoloX
 from models.Detect.MuitlHead import Decoupled_Detect, ASFF_Detect, IDetect, IAuxDetect
 from utils.loss import ComputeLoss, ComputeNWDLoss, ComputeXLoss
 
