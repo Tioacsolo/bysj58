@@ -7,7 +7,7 @@ import torch
 import torch.nn as nn
 import numpy as np
 
-
+from utils.metrics import bbox_iou_xiou
 from utils.metrics import bbox_iou, box_iou, bbox_alpha_iou
 from utils.torch_utils import de_parallel, is_parallel
 from utils.general import xywh2xyxy
